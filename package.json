@@ -1,0 +1,29 @@
+{
+  "name": "upease",
+  "version": "1.0.0",
+  "description": "A web app for providing necessary support to users to destress and to tackle problems such as anxiety, depression, etc. Clinically by real-time doctor-patient/user interaction",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vilayat-Ali/Upease.git"
+  },
+  "keywords": [
+    "mental-health"
+  ],
+  "author": "Syed Vilayat Ali Rizvi, Muntazir Rashid, Sumit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Vilayat-Ali/Upease/issues"
+  },
+  "homepage": "https://github.com/Vilayat-Ali/Upease#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7",
+    "nodemon": "^2.0.7"
+  }
+}
