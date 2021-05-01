@@ -15,6 +15,9 @@ const userSchema = mongoose.Schema({
     role:{
         type: String,
         required: true
+    },
+    callName:{
+        type: String
     }
 }, {collection: 'users'});
 

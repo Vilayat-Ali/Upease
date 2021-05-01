@@ -18,13 +18,30 @@ router.post('/sign-up', async (req,res)=>{
         res.render('index', {error1: "", error2: error});
     }
     else{
-    const userDB = new user({
+
+        if(req.body.role == "Doctor"){
+            const callName = "Dr "+req.body.fname;
+            const userDB = new user({
+                name: req.body.fname,
+                email: req.body.email,
+                pass: req.body.password,
+                role: req.body.role,
+                callName: callName
+            });
+            await userDB.save();
+        }
+        
+        else{
+        const userDB = new user({
         name: req.body.fname,
         email: req.body.email,
         pass: req.body.password,
         role: req.body.role
     });
     await userDB.save();
+        }
+    res.render("profile", {username: req.body.fname});
+
 }
 });
 
@@ -38,9 +55,6 @@ router.post('/sign-in', (req,res)=>{
         password: password
     
     }
-
-    console.log("Form body: ");
-    console.log(detail);
 
     // Validating
     user.find({}, (err, data)=>{
@@ -58,16 +72,12 @@ router.post('/sign-in', (req,res)=>{
             }
             for(ele in usernames){
                 if(usernames[el] === detail["username"] && passGen[el] === detail["password"]){
-                    console.log("check");
                     res.render("profile", {username: detail["username"]});
                 }
                 else{
                     fcount+=1;
                 }
             }
-
-            console.log("DB: ");
-            console.log(usernames, passGen);
 
             if(fcount==usernames.length){
                 const error = "Invalid username or password.";
