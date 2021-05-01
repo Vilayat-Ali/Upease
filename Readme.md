@@ -28,4 +28,5 @@ The scope for this project is vast. NGOs and international organisations such as
 # Contributions 
 
 UI-UX,Front-End : Muntazir Rashid
+
 Back-End, Database-Modelling, Front-End Integration : Syed Vilayat Ali Rizvi
