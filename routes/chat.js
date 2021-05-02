@@ -7,3 +7,5 @@ const chatModel = require("../Models/chat");
 router.get('/', (req,res)=>{
     res.render("chat");
 });
+
+module.exports = router;

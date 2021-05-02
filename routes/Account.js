@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const upload = require("express-fileupload");
+
 // Importing models
 const user = require("../Models/user.js");
 
@@ -11,15 +13,16 @@ router.get('/', (req,res)=>{
     res.render("index", {error1: "", error2: ""});
 });
 
-// Sing-up
-router.post('/sign-up', async (req,res)=>{
-    if(req.body.role == "--- Select Your Role ---"){
+
+router.post('/', async(req,res)=>{
+    const role = req.body.role;
+    if(role == "--- Select Your Role ---"){
         const error = "Please leave no form-entry blank.";
         res.render('index', {error1: "", error2: error});
     }
     else{
 
-        if(req.body.role == "Doctor"){
+        if(role == "Doctor"){
             const callName = "Dr "+req.body.fname;
             const userDB = new user({
                 name: req.body.fname,
@@ -40,15 +43,16 @@ router.post('/sign-up', async (req,res)=>{
     });
     await userDB.save();
         }
-    res.render("profile", {username: req.body.fname});
+    res.render("profile", {username: req.body.fname, userrole: role, useremail: req.body.email});
 
 }
 });
 
-//Sign-Up
-router.post('/sign-in', (req,res)=>{
+
+
+
+router.post('/', (req,res)=>{
     var password = req.body.password;
-    password = password.toString();
 
     const detail = {
         username: req.body.username,
@@ -63,16 +67,25 @@ router.post('/sign-in', (req,res)=>{
             var usernames = [];
             var passGen = [];
             var fcount = 0;
+            var role = undefined;
+            var email = undefined;
+
             for(el in data){
                 usernames.push(data[el]["name"]);
                 passGen.push(data[el]["pass"]);
             }
             for(el in data){
-                console.log(el);
+                if(usernames[el] === detail["username"] && passGen[el] === detail["password"]){
+                    role = data[el]["role"];
+                    email = data[el]["email"];
+                }
             }
             for(ele in usernames){
                 if(usernames[el] === detail["username"] && passGen[el] === detail["password"]){
-                    res.render("profile", {username: detail["username"]});
+                    res.render("profile", {username: detail["username"],
+                userrole: role, 
+                useremail: email
+                });
                 }
                 else{
                     fcount+=1;
@@ -86,6 +99,10 @@ router.post('/sign-in', (req,res)=>{
            }
     })
        
+});
+
+router.get('/profile', (req,res)=>{
+    res.render("profile", {username: req.body.fname, userrole: role, useremail: req.body.email});
 });
 
 
