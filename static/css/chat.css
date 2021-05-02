@@ -145,7 +145,7 @@ font-size: 20px;
 cursor: pointer;
 margin-right: 20px;
 }
-.msg_cotainer{
+.msg_container{
 margin-top: auto;
 margin-bottom: auto;
 margin-left: 10px;
@@ -154,7 +154,7 @@ background-color: #82ccdd;
 padding: 10px;
 position: relative;
 }
-.msg_cotainer_send{
+.msg_container_send{
 margin-top: auto;
 margin-bottom: auto;
 margin-right: 10px;
@@ -257,7 +257,7 @@ margin-bottom: 15px !important;
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
   }
 
-.msg_cotainer{
+.msg_container{
     margin-top: 1vw;
 }
 #name{

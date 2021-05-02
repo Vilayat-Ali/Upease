@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const upload = require("express-fileupload");
+let userNameRoom = undefined;
 
 // Importing models
 const user = require("../Models/user.js");
@@ -44,14 +45,11 @@ router.post('/', async(req,res)=>{
     await userDB.save();
         }
     res.render("profile", {username: req.body.fname, userrole: role, useremail: req.body.email});
-
+    userNameRoom = req.body.fname;
 }
 });
 
-
-
-
-router.post('/', (req,res)=>{
+router.post('/sign-in', (req,res)=>{
     var password = req.body.password;
 
     const detail = {
@@ -103,9 +101,12 @@ router.post('/', (req,res)=>{
 
 router.get('/profile', (req,res)=>{
     res.render("profile", {username: req.body.fname, userrole: role, useremail: req.body.email});
+    userNameRoom = req.body.fname;
 });
 
 
 
 
+ 
+module.exports.username = userNameRoom;
 module.exports = router;

@@ -1,16 +1,8 @@
 const sendBtn = document.getElementById('send');
 const socket = io();
 
-// Getting username 
-const username = Qs.parse(location.search, {ignoreQueryPrefix: true});
-console.log(username, room);
-
-
-// Join username
-socket.emit('joinRoom', username);
-
-socket.on('Message', (Message)=>{
-    postMessage(Message);
+socket.on('Message', function(message){
+    postMessage(message);
 })
 
 
@@ -24,13 +16,20 @@ function sendMessage(){
     console.log(Message);
 }
 
-function postMessage(message){
-    const messageBody  = document.createElement("div");
-    messageBody.className = "msg_cotainer";
-    const name = document.createTextNode("YOU: ");
-    messageBody.appendChild(name);
-    const messageNow = document.createTextNode(message);
-    messageBody.appendChild(messageNow);
-    var screen = document.getElementById('messageScreen');
-    screen.appendChild(messageBody);
+function postMessage(message, username){
+
+    console.log(username);
+
+    const screen = document.querySelector('#messageScreen');
+    
+    const messagez = document.createElement('div');
+    messagez.className = "msg_container";
+    
+    var userCol = document.createTextNode('Message: ');
+    messagez.appendChild(userCol);
+
+    var messageSyn = document.createTextNode(message);
+    messagez.appendChild(messageSyn);
+
+    screen.append(messagez);
 }

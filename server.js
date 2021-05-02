@@ -10,6 +10,9 @@ const http = require('http');
 const app = express();
 const socket = require('socket.io');
 
+const username = require('./routes/Account.js');
+const messageUser = username.username;
+
 // Setting up Port
 const PORT = process.env.PORT || 8080;
 
